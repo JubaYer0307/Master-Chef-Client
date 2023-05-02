@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react";
+import superfood from "../../../assets/superfood.png";
 
 const Header = () => {
-    return (
-        <div>
-            <h2>this is header</h2>
-        </div>
-    );
+  return (
+    <div>
+      <div className="text-center">
+        <img src={superfood} alt="" />
+      </div>
+    </div>
+  );
 };
 
 export default Header;
