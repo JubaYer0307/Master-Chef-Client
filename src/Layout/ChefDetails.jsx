@@ -34,11 +34,13 @@ const ChefDetails = () => {
                 </Card.Text>
                 </Card.Body> 
             </Card>
-            <Recipies></Recipies>
-          
+          {/* <h1>{chef.chefName}</h1>
+          <p>Years of experience: {chef.yearsOfExperience}</p>
+          <p>Number of recipes: {chef.numberOfRecipes}</p>
+          <p>Likes: {chef.likes}</p> */}
         </Container>
       )}
-      
+      <Recipies></Recipies>
     </div>
     
   );

@@ -2,28 +2,45 @@ import {createBrowserRouter} from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Chefs from "../Pages/Chefs/Chefs/Chefs";
-import ChefDetails from "../../src/Layout/ChefDetails"
+import ChefDetails from "../../src/Layout/ChefDetails";
+import Login from "../Pages/Login/Login/Login";
+import Register from "../Pages/Login/Register/Register";
+
 const router = createBrowserRouter([
-    {
+  {
+    path: '/',
+    element: <Main></Main>,
+    children: [
+      {
         path: '/',
-        element: <Main></Main>,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>
-            }
-        ]
-    },
-    {
-        path: 'chef',
-        element: <ChefDetails></ChefDetails>,
-        children: [
-            {
-                path: ':id',
-                element: <Chefs></Chefs>
-            }
-        ]
-    }
-])
+        element: <Home></Home>
+      }
+      
+    ]
+  },
+  {
+    path: 'chef',
+    element: <ChefDetails></ChefDetails>,
+    children: [
+      {
+        path: ':id',
+        element: <Chefs></Chefs>
+      }
+    ]
+  },
+  {
+    path: '/',
+    children: [
+        {
+            path: 'login',
+            element: <Login></Login>
+          },
+          {
+            path: 'register',
+            element: <Register></Register>
+          }
+    ]
+  }
+]);
 
 export default router;

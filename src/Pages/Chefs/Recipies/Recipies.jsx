@@ -18,7 +18,7 @@ const Recipies = () => {
         .catch((error) => console.log(error));
     }, []);
 
-    const recipieCards = recipie.map((recipie) => (
+    const recipieCards = Array.isArray(recipie) && recipie.map((recipie) => (
         <Col key={recipie.id} lg={4} md={6} className="mb-4">
           <Card>
             <Card.Img variant="top" src={recipie.recipiePicture} />

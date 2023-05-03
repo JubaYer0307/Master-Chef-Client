@@ -6,6 +6,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+
 const Main = () => {
   const [chefs, setChefs] = useState([]);
 
@@ -15,6 +16,8 @@ const Main = () => {
       .then((data) => setChefs(data))
       .catch((error) => console.log(error));
   }, []);
+
+  console.log(chefs);
 
   const chefCards = chefs.map((chef) => (
     <Col key={chef.id} lg={4} md={6} className="mb-4">
@@ -29,7 +32,9 @@ const Main = () => {
             <br />
             Likes: {chef.likes}
           </Card.Text>
-          <Link to={`/chef/${chef.id}`}>
+          <Link to={{ pathname: `/chef/${chef.id}`, state: { chefs: chefs } }}>
+
+
             <Button variant="primary">View recipes</Button>
           </Link>
         </Card.Body>
