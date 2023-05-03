@@ -13,7 +13,14 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
 
-    const {user} = useContext(AuthContext);
+    const {user, logOut} = useContext(AuthContext);
+    console.log(user);
+
+    const handleLogOut = () => {
+        logOut()
+        .then()
+        .catch(error => console.log(error))
+    }
 
     
   return (
@@ -28,7 +35,7 @@ const Header = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="#features"><Link to={`/#`}>Home</Link></Nav.Link>
-              <Nav.Link href="#pricing">Blog</Nav.Link>
+              <Nav.Link href="blog">Blog</Nav.Link>
               
             </Nav>
             <Nav>
@@ -36,7 +43,7 @@ const Header = () => {
               </Nav.Link>}
               <Nav.Link eventKey={2} href="#memes">
                 { user ? 
-                <Button variant="secondary">Logout</Button> :
+                <Button onClick={handleLogOut} variant="secondary">Logout</Button> :
                 <Link to="/login"><Button variant="secondary">Login</Button></Link>
                 }
               </Nav.Link>
