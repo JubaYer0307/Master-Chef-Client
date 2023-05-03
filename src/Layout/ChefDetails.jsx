@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card, Container } from "react-bootstrap";
+import Recipies from "../Pages/Chefs/Recipies/Recipies";
 
 const ChefDetails = () => {
   const { id } = useParams();
@@ -33,13 +34,13 @@ const ChefDetails = () => {
                 </Card.Text>
                 </Card.Body> 
             </Card>
-          {/* <h1>{chef.chefName}</h1>
-          <p>Years of experience: {chef.yearsOfExperience}</p>
-          <p>Number of recipes: {chef.numberOfRecipes}</p>
-          <p>Likes: {chef.likes}</p> */}
+            <Recipies></Recipies>
+          
         </Container>
       )}
+      
     </div>
+    
   );
 };
 
