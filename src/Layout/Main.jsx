@@ -29,7 +29,7 @@ const Main = () => {
             <br />
             Likes: {chef.likes}
           </Card.Text>
-          <Link to={chef.viewRecipesButton}>
+          <Link to={`/chef/${chef.id}`}>
             <Button variant="primary">View recipes</Button>
           </Link>
         </Card.Body>
