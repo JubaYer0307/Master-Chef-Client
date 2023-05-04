@@ -20,29 +20,26 @@ const ChefDetails = () => {
     <div>
       {chef && (
         <Container>
-            <Card className="mb-4">
-                
-                <Card.Body>
-                    <Card.Title>{chef.chefName}</Card.Title>
-                    <Card.Img variant="top" src={chef.chefPicture} />
-                    <Card.Text><p>
-                    Years of experience: {chef.yearsOfExperience}</p>
-                    <p>numberOfRecipes {chef.numberOfRecipes}</p>
-                
-                <div > <p>Likes: {chef.likes}</p>
-                <p>shortBio: {chef.shortBio}</p></div>
-                </Card.Text>
-                </Card.Body> 
-            </Card>
-          {/* <h1>{chef.chefName}</h1>
-          <p>Years of experience: {chef.yearsOfExperience}</p>
-          <p>Number of recipes: {chef.numberOfRecipes}</p>
-          <p>Likes: {chef.likes}</p> */}
+          <Card className="mb-4">
+            <Card.Body>
+              <Card.Title>{chef.chefName}</Card.Title>
+              <Card.Img variant="top" src={chef.chefPicture} />
+              <Card.Text>
+                <span>Years of experience: {chef.yearsOfExperience}</span>
+                <span>numberOfRecipes {chef.numberOfRecipes}</span>
+                <span>
+                  Likes: {chef.likes}
+                  <br />
+                  shortBio: {chef.shortBio}
+                </span>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+         
         </Container>
       )}
       <Recipies></Recipies>
     </div>
-    
   );
 };
 
