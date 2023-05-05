@@ -2,27 +2,40 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../Pages/Shared/Footer/Footer";
 import Header from "../Pages/Shared/Header/Header";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
+import "./Main.css";
+import Banner from "./Banner";
+import TwoMoreSection from "./twoMoreSection";
+import { Fragment } from "react";
+import LazyLoad from "react-lazy-load";
 
 const Main = () => {
   const [chefs, setChefs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/main")
+    fetch("https://superfood-server-jubayer0307.vercel.app/main")
       .then((res) => res.json())
-      .then((data) => setChefs(data))
+      .then((data) => {
+        setChefs(data);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(chefs);
-
   const chefCards = chefs.map((chef) => (
-    <Col key={chef.id} lg={4} md={6} className="mb-4">
-      <Card>
-        <Card.Img variant="top" src={chef.chefPicture} />
+    <Col key={chef.id} xs={12} lg={4} md={6} className="mb-4 mt-3">
+      <Card style={{ height: "auto" }}>
+        <LazyLoad>
+          <Card.Img
+            variant="top"
+            src={chef.chefPicture}
+            className="img-fluid"
+            style={{ objectFit: "cover", height: "250px" }}
+          />
+        </LazyLoad>
         <Card.Body>
           <Card.Title>{chef.chefName}</Card.Title>
           <Card.Text>
@@ -32,10 +45,12 @@ const Main = () => {
             <br />
             Likes: {chef.likes}
           </Card.Text>
-          <Link to={{ pathname: `/chef/${chef.id}`, state: { chefs: chefs } }}>
-
-
-            <Button variant="primary">View recipes</Button>
+          <Link
+            to={{ pathname: `/chef/${chef.id}`, state: { chefs: chefs } }}
+          >
+            <Button variant="primary" className="button-primary">
+              View recipes
+            </Button>
           </Link>
         </Card.Body>
       </Card>
@@ -49,10 +64,22 @@ const Main = () => {
   }
 
   return (
-    <div>
-      <Header></Header>
-      <Container>{rows}</Container>
-      <Footer></Footer>
+    <div className="main">
+      
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center loader">
+          <Spinner animation="border" variant="primary" size="lg" />
+        </div>
+      ) : (
+        <div>
+          <Header></Header>
+          <Banner></Banner>
+          <Container>{rows}</Container>
+          <TwoMoreSection></TwoMoreSection>
+          <Footer></Footer>
+        </div>
+      )}
+      
     </div>
   );
 };

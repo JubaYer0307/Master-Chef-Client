@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card, Container } from "react-bootstrap";
 import Recipies from "../Pages/Chefs/Recipies/Recipies";
+import Header from "../Pages/Shared/Header/Header";
+
+
 
 const ChefDetails = () => {
   const { id } = useParams();
   const [chef, setChef] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/main/${id}`)
+    fetch(`https://superfood-server-jubayer0307.vercel.app/main/${id}`)
       .then((res) => res.json())
       .then((data) => setChef(data))
       .catch((error) => console.log(error));
@@ -17,29 +20,39 @@ const ChefDetails = () => {
   console.log(id);
 
   return (
-    <div>
-      {chef && (
-        <Container>
-          <Card className="mb-4">
-            <Card.Body>
-              <Card.Title>{chef.chefName}</Card.Title>
-              <Card.Img variant="top" src={chef.chefPicture} />
-              <Card.Text>
-                <span>Years of experience: {chef.yearsOfExperience}</span>
-                <span>numberOfRecipes {chef.numberOfRecipes}</span>
-                <span>
-                  Likes: {chef.likes}
-                  <br />
-                  shortBio: {chef.shortBio}
-                </span>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-         
-        </Container>
-      )}
-      <Recipies></Recipies>
-    </div>
+    <>
+      <Header />
+      <div>
+        {chef && (
+          <Container>
+            <Card className="mb-4" style={{ width: "100%"}}>
+              <div style={{ display: "flex" , width: "70%", marginLeft: '200px'}}>
+                <div style={{ flex: 1 }}>
+                  <Card.Body>
+                    <Card.Title>{chef.chefName}</Card.Title>
+                    
+                    <Card.Img variant="top" src={chef.chefPicture} />
+                    
+                  </Card.Body>
+                </div>
+                <div style={{ flex: 1, width: "50%" , marginTop: '100px' }}>
+                  <Card.Text>
+                    <p>Years of experience: {chef.yearsOfExperience}</p>
+                    <p>Number Of Recipes: {chef.numberOfRecipes}</p>
+                    <p>
+                      Likes: {chef.likes}
+                      <br />
+                      Bio: {chef.shortBio}
+                    </p>
+                  </Card.Text>
+                </div>
+              </div>
+            </Card>
+          </Container>
+        )}
+        <Recipies />
+      </div>
+    </>
   );
 };
 

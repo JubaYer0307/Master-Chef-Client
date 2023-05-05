@@ -4,6 +4,9 @@ import Card from 'react-bootstrap/Card';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Header from "../../Shared/Header/Header";
+import Footer from "../../Shared/Footer/Footer";
+import './Recipes.css'
 
 
 const toastStyle = {
@@ -29,7 +32,7 @@ const Recipies = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/recipies")
+    fetch("https://superfood-server-jubayer0307.vercel.app/recipies")
       .then((res) => res.json())
       .then((data) => setRecipie(data))
       .catch((error) => console.log(error));
@@ -59,7 +62,7 @@ const Recipies = () => {
               onClick={() => handleFavoriteClick(recipie.id, recipie.name)} 
               disabled={isFavorite}
             >
-              {isFavorite ? 'Favorited' : 'Add to Favorite'}
+              {isFavorite ? 'Added' : 'Add to Favorite'}
             </Button>
           </Card.Body>
         </Card>
@@ -74,8 +77,10 @@ const Recipies = () => {
   }
 
   return (
+    <>
+    
     <div>
-      <Container>{rows}</Container>
+      <Container className='recipesCard'>{rows}</Container>
       <Toast show={favoriteRecipes.length > 0} onClose={() => setFavoriteRecipes([])} style={toastStyle}>
         <Toast.Header>
           <strong className="mr-auto">Favorite Recipes</strong>
@@ -87,6 +92,8 @@ const Recipies = () => {
         </Toast.Body>
       </Toast>
     </div>
+    <Footer />
+    </>
   );
 };
 

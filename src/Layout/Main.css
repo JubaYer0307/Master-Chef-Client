@@ -1,0 +1,51 @@
+.main {
+  background-image: linear-gradient(to bottom, #2e2c2c, #2dce7d, #2e2c2c);
+    
+    
+  }
+
+/* Set fixed height and width for card */
+.card {
+    height: 500px;
+    width: 400px;
+    background-image: linear-gradient(to bottom, #c9f0c2, #72bf44);
+  }
+  
+  
+  
+  
+  /* Center the content inside the card body */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Set background color for card */
+  .card {
+    background-color: #f7f7f7;
+    width: 100%;
+  max-width: 600px;
+  }
+
+  
+
+  /* Set gradient background for button */
+.button-primary {
+    background-image: linear-gradient(to bottom, #4dbd74, #1a8d5f);
+    border-color: #1a8d5f;
+    color: #fff;
+  }
+  
+  /* Set hover effect for button */
+  .button-primary:hover {
+    background-image: linear-gradient(to bottom, #3d9c5b, #147448);
+    border-color: #147448;
+    color: #fff;
+  }
+  
+
+  
+  

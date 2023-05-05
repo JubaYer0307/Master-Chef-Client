@@ -1,36 +1,89 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import Button from "react-bootstrap/Button";
 
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../../providers/AuthProvider';
+import './register.css';
+import Header from '../../Shared/Header/Header';
+import Footer from '../../Shared/Footer/Footer';
+import { updateProfile, signOut } from 'firebase/auth';
+
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState('');
+    
+  const [photo, setPhoto] = useState('');
 
-    const handleRegister = event => {
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const photo = form.photo.value;
-        const email = form.email.value;
-        const password = form.password.value;
+  const [name, setName] = useState('');
 
-        console.log(name, photo, email, password);
+  const { createUser } = useContext(AuthContext);
 
-        createUser(email, password)
-        .then(result => {
-            const createdUser = result.user;
-            console.log(createUser);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+  const handleRegister = event => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+  
+    if (email.trim() === '' || password.trim() === '') {
+      setError('Email and password fields cannot be empty.');
+      return;
     }
+    else if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+  
+    console.log(name, photo, email, password);
+  
+    createUser(email, password)
+      .then(result => {
+        const createdUser = result.user;
+        console.log(createdUser);
+        setError('');
+        event.target.reset();
+        updateUserData(createdUser, photo, name); 
+        // Sign out the current user after successful registration
+        signOut(createdUser.auth)
+          .then(() => {
+            console.log('User signed out successfully');
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        // Redirect the user to the login page after successful registration
+        window.location.href = '/login';
+      })
+      .catch(error => {
+        console.log(error);
+        setError(error.message);
+      });
+  };
+  
+  const updateUserData = (user, photo, name) => {
+    updateProfile(user, {
+        photoURL: photo,
+        displayName: name 
+    })
+    .then(() => {
+        setPhoto(photo); 
+        setName(name); 
+    })
+    .catch(error => {
+        setError(error.message);
+    });
+  }
+      
+      
+    
 
     
     return (
+        <>
+        <Header photo={photo} name={name}/>
         <Container className="w-25 mx-auto">
       <h3>Please Register</h3>
       <Form onSubmit={handleRegister}>
@@ -40,16 +93,16 @@ const Register = () => {
             type="text"
             name="name"
             placeholder="Your Name"
-            required
+            
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Photo URL</Form.Label>
           <Form.Control
             type="text"
-            name="photo"
+            name="photo" id='photo'
             placeholder="Your Photo URL"
-            required
+            
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -58,7 +111,7 @@ const Register = () => {
             type="email"
             name="email"
             placeholder="Enter email"
-            required
+            
           />
         </Form.Group>
 
@@ -68,23 +121,22 @@ const Register = () => {
             type="password"
             name="password"
             placeholder="Password"
-            required
+            
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" name='accept' label="Accept Terms and Conditions" />
-        </Form.Group>
+        
 
         <Button variant="primary" type="submit">
           Register
         </Button>
         <br />
-        <Form.Text className="text-secondary">Don't Already Have an Account? <Link to="/login">Register</Link> </Form.Text>
+        <Form.Text className="text-secondary"> Already Have an Account? <Link to="/login">Login</Link> </Form.Text>
         <Form.Text className="text-success"></Form.Text>
-        <Form.Text className="text-danger"></Form.Text>
+        <p className='text-danger'>{error}</p>
       </Form>
     </Container>
+    <Footer/></>
     );
 };
 

@@ -1,0 +1,14 @@
+/* register.css */
+
+.container {
+    background: linear-gradient(to bottom, #e4f4e9, #bfe6bf);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-control:focus {
+    border-color: #75a675;
+    box-shadow: none;
+  }
+  
