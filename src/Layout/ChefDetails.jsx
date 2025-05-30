@@ -25,7 +25,7 @@ const ChefDetails = () => {
       <div>
         {chef && (
           <Container>
-            <Card className="mb-4" style={{ width: "100%"}}>
+            <Card className="mb-4" style={{ width: "100%", maxWidth: '100%', height: 'auto'}}>
               <div style={{ display: "flex" , width: "70%", marginLeft: '200px'}}>
                 <div style={{ flex: 1 }}>
                   <Card.Body>
@@ -39,7 +39,7 @@ const ChefDetails = () => {
                   <Card.Text>
                     <p>Years of experience: {chef.yearsOfExperience}</p>
                     <p>Number Of Recipes: {chef.numberOfRecipes}</p>
-                    <p>
+                    <p style={{ textAlign: 'justify' }}>
                       Likes: {chef.likes}
                       <br />
                       Bio: {chef.shortBio}

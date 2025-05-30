@@ -46,7 +46,7 @@ const Recipies = () => {
     const isFavorite = favoriteRecipes.some(recipe => recipe.id === recipie.id);
     return (
       <Col key={recipie.id} lg={4} md={6} className="mb-4">
-        <Card>
+        <Card style={{ textAlign: 'justify' }}>
           <Card.Img variant="top" src={recipie.recipiePicture} />
           <Card.Body>
             <Card.Title>{recipie.name}</Card.Title>
@@ -57,13 +57,13 @@ const Recipies = () => {
               <br />
               Rating: {recipie.rating}
             </Card.Text>
-            <Button 
+            {/* <Button 
               variant="primary" 
               onClick={() => handleFavoriteClick(recipie.id, recipie.name)} 
               disabled={isFavorite}
             >
               {isFavorite ? 'Added' : 'Add to Favorite'}
-            </Button>
+            </Button> */}
           </Card.Body>
         </Card>
       </Col>

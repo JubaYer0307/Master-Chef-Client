@@ -11,13 +11,16 @@ const Blog = () => {
   return (
     <>
       <Header />
-      <Container className="text-center" style={{ margin: 'auto' }}>
+
+      {/* !--PDF part!--! */}
+
+      {/* <Container className="text-center" style={{ margin: 'auto' }}>
         <Pdf targetRef={cardRef}>
           {({ toPdf }) => <button onClick={toPdf} style={{ backgroundColor: 'green', color: 'white', padding: '10px', borderRadius: '5px' }}>Download Pdf</button>}
         </Pdf>
-      </Container>
+      </Container> */}
       <Container className="text-center" style={{ margin: 'auto' }}>
-      <Card style={{ width: '80rem' }} ref={cardRef}>
+      <Card style={{ maxWidth: '100%' , height: 'auto'}} ref={cardRef}>
   <Card.Header>Question & Answers</Card.Header>
   <ListGroup variant="flush">
     <ListGroup.Item style={{ overflowWrap: 'break-word', wordWrap: 'break-word' }}>
